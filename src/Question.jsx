@@ -11,9 +11,9 @@ export default function Question({ question }) {
   return (
     <div>
       <div>{decode(question.question)}</div>
-      <ul>
+      <ul style={{ listStyle: "none" }}>
         {answers.map((answer) => (
-          <Answer answer={answer} />
+          <Answer answer={answer} questionId={question.id} />
         ))}
       </ul>
       <hr />

@@ -2,6 +2,7 @@ export default {
   response_code: 0,
   results: [
     {
+      id: 1,
       category: "History",
       type: "multiple",
       difficulty: "medium",
@@ -14,6 +15,7 @@ export default {
       ],
     },
     {
+      id: 2,
       category: "General Knowledge",
       type: "multiple",
       difficulty: "medium",
@@ -22,6 +24,7 @@ export default {
       incorrect_answers: ["Russian", "Greek", "Latvian"],
     },
     {
+      id: 3,
       category: "Entertainment: Video Games",
       type: "multiple",
       difficulty: "medium",
@@ -30,6 +33,7 @@ export default {
       incorrect_answers: ["59", "65", "62"],
     },
     {
+      id: 4,
       category: "Entertainment: Books",
       type: "multiple",
       difficulty: "easy",
@@ -43,6 +47,7 @@ export default {
       ],
     },
     {
+      id: 5,
       category: "General Knowledge",
       type: "multiple",
       difficulty: "hard",
