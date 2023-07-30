@@ -5,6 +5,28 @@ import Question from "./Question"
 function App() {
   // not startet, started, finished
   const [quizState, setQuizState] = useState("not started")
+  const [questionPoints, setQuestionPoints] = useState([
+    // { id: 1, point: 1 },
+    // { id: 2, point: 1 },
+    // { id: 3, point: 1 },
+    // { id: 4, point: 0 },
+    // { id: 5, point: 1 },
+  ])
+
+  function changeQuestionPoint(id, point) {
+    const questionPointObj = { id, point }
+    const newQuestionPoints = questionPoints.filter(
+      (questionPoint) => questionPoint.id !== id
+    )
+    newQuestionPoints.push(questionPointObj)
+    setQuestionPoints(newQuestionPoints)
+  }
+
+  const points = questionPoints.reduce(
+    (accumulator, currentValue) => accumulator + currentValue.point,
+    0
+  )
+
   const questions = data.results
 
   function startQuiz() {
@@ -33,7 +55,9 @@ function App() {
           )}
           {quizState === "finished" && (
             <div>
-              <h3>You Scored x/{questions.length} correct answers</h3>
+              <h3>
+                You Scored {points}/{questions.length} correct answers
+              </h3>
               <button onClick={playAgain}>Play Again</button>
             </div>
           )}
