@@ -1,8 +1,11 @@
-export default function Answer({ answer, questionId }) {
+export default function Answer({ answer, questionId, answerQuestion }) {
   return (
     <li>
-      <input id={answer} type="radio" name={`question-${questionId}`} />
-      <label htmlFor={answer}>{answer}</label>
+      <input id={answer.id}
+        type="radio"
+        name={`question-${questionId}`}
+        onClick={() => answerQuestion(questionId, answer.id)} />
+      <label htmlFor={answer.id}>{answer.answer}</label>
     </li>
   )
 }

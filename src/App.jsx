@@ -9,7 +9,9 @@ function App() {
   // not startet, started, finished
   const [quizState, setQuizState] = useState("not started")
   const [questions, setQuestions] = useState([])
-  const points = 0
+  const [points, setPoints] = useState(0)
+
+  console.log(questions)
 
   useEffect(() => {
     const allQuestions = data.results.map(q => ({
@@ -20,38 +22,28 @@ function App() {
       ]).map(a => ({ id: nanoid(), answer: a })),
       ...q
     }));
-    console.log(allQuestions)
     setQuestions(allQuestions)
   }, [])
-  // const [questionPoints, setQuestionPoints] = useState([
-  //   // { id: 1, point: 1 },
-  //   // { id: 2, point: 1 },
-  //   // { id: 3, point: 1 },
-  //   // { id: 4, point: 0 },
-  //   // { id: 5, point: 1 },
-  // ])
 
-  // function changeQuestionPoint(id, point) {
-  //   const questionPointObj = { id, point }
-  //   const newQuestionPoints = questionPoints.filter(
-  //     (questionPoint) => questionPoint.id !== id
-  //   )
-  //   newQuestionPoints.push(questionPointObj)
-  //   setQuestionPoints(newQuestionPoints)
-  // }
-
-  // const points = questionPoints.reduce(
-  //   (accumulator, currentValue) => accumulator + currentValue.point,
-  //   0
-  // )
-
-  // const questions = data.results
+  function answerQuestion(questionId, answerId) {
+    setQuestions(oldQuestions => oldQuestions.map(
+      oldQuestion => oldQuestion.id === questionId
+        ? { ...oldQuestion, selectedAnswer: answerId }
+        : oldQuestion
+    ))
+  }
 
   function startQuiz() {
     setQuizState("started")
+    setPoints(0)
   }
 
   function checkAnswers() {
+    questions.forEach(question => {
+      if (!question.selectedAnswer) return
+      const selectedAnswerValue = question.answers.filter(answer => answer.id === question.selectedAnswer)[0]?.answer
+      if (selectedAnswerValue === question.correct_answer) setPoints(prevPoints => prevPoints + 1)
+    });
     setQuizState("finished")
   }
 
@@ -66,7 +58,7 @@ function App() {
       ) : (
         <div>
           {questions.map((question) => (
-            <Question key={question.id} question={question} />
+            <Question key={question.id} question={question} answerQuestion={answerQuestion} />
           ))}
           {quizState === "started" && (
             <button onClick={checkAnswers}>Check Answers</button>
