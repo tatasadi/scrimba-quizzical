@@ -1,0 +1,36 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.question {
+  padding: 1rem;
+}
+
+.answers {
+  list-style-type: none;
+  display: flex;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.answers input[type="radio"] {
+  display: none;
+}
+
+.answers input[type="radio"]:checked + label,
+.Checked + label {
+  background: lightblue;
+}
+
+.answers label {
+  background-color: #eee;
+  padding: 0.5rem;
+  cursor: pointer;
+  border-radius: 0.5rem;
+}
+
+.answers label:hover {
+  background: #ddd;
+}
