@@ -1,5 +1,3 @@
-import React from "react"
-
 export default function Answer({ answer, questionId }) {
   return (
     <li>
