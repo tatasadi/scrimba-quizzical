@@ -19,9 +19,16 @@
   display: none;
 }
 
-.answers input[type="radio"]:checked + label,
-.Checked + label {
+.answers input[type="radio"]:checked + label {
   background: lightblue;
+}
+
+.answers input[type="radio"]:checked + label.false {
+  background: lightcoral !important;
+}
+
+.correct{
+  background: lightgreen !important;
 }
 
 .answers label {

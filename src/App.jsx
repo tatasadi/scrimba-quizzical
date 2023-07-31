@@ -58,7 +58,7 @@ function App() {
       ) : (
         <div>
           {questions.map((question) => (
-            <Question key={question.id} question={question} answerQuestion={answerQuestion} />
+            <Question key={question.id} question={question} answerQuestion={answerQuestion} isFinished={quizState === "finished"} />
           ))}
           {quizState === "started" && (
             <button onClick={checkAnswers}>Check Answers</button>
