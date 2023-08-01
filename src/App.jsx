@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react"
 import { nanoid } from 'nanoid'
-import data from "./data"
 import Question from "./Question"
 import { shuffleArray } from "./utils"
 
+const apiURL = "https://opentdb.com/api.php?amount=5&difficulty=easy&type=multiple"
 
 function App() {
   // not startet, started, finished
@@ -14,16 +14,22 @@ function App() {
   console.log(questions)
 
   useEffect(() => {
-    const allQuestions = data.results.map(q => ({
-      id: nanoid(),
-      answers: shuffleArray([
-        q.correct_answer,
-        ...q.incorrect_answers,
-      ]).map(a => ({ id: nanoid(), answer: a })),
-      ...q
-    }));
-    setQuestions(allQuestions)
-  }, [])
+    if(quizState === "not started"){
+      fetch("https://opentdb.com/api.php?amount=5&difficulty=easy&type=multiple").then(result => result.json()).then(
+        data => {
+          const allQuestions = data.results.map(q => ({
+            id: nanoid(),
+            answers: shuffleArray([
+              q.correct_answer,
+              ...q.incorrect_answers,
+            ]).map(a => ({ id: nanoid(), answer: a })),
+            ...q
+          }));
+          setQuestions(allQuestions)
+        }
+      )
+    }
+  }, [quizState])
 
   function answerQuestion(questionId, answerId) {
     if(quizState === "finished") return
