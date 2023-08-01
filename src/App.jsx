@@ -26,6 +26,7 @@ function App() {
   }, [])
 
   function answerQuestion(questionId, answerId) {
+    if(quizState === "finished") return
     setQuestions(oldQuestions => oldQuestions.map(
       oldQuestion => oldQuestion.id === questionId
         ? { ...oldQuestion, selectedAnswer: answerId }
@@ -52,28 +53,36 @@ function App() {
   }
 
   return (
-    <>
+    <main className="container">
+      <img src="/img/circle-yellow.svg" className="circle-yellow"/>
+      <img src="/img/circle-blue.svg" className="circle-blue"/>
       {quizState === "not started" ? (
-        <button onClick={startQuiz}>Start Quiz</button>
+        <>
+          <h1>Quizzical</h1>
+          <h2>Some description if needed</h2>
+          <button className="btn-primary" onClick={startQuiz}>Start Quiz</button>
+        </>
       ) : (
         <div>
           {questions.map((question) => (
             <Question key={question.id} question={question} answerQuestion={answerQuestion} isFinished={quizState === "finished"} />
           ))}
           {quizState === "started" && (
-            <button onClick={checkAnswers}>Check Answers</button>
+            <div className="align-center">
+              <button className="btn-primary btn-md" onClick={checkAnswers}>Check Answers</button>
+            </div>
           )}
           {quizState === "finished" && (
-            <div>
-              <h3>
+            <div className="align-center">
+              <h2>
                 You Scored {points}/{questions.length} correct answers
-              </h3>
-              <button onClick={playAgain}>Play Again</button>
+              </h2>
+              <button className="btn-primary" onClick={playAgain}>Play Again</button>
             </div>
           )}
         </div>
       )}
-    </>
+    </main>
   )
 }
 

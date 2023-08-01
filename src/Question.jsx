@@ -18,6 +18,7 @@ export default function Question({ question, answerQuestion, isFinished }) {
           />
         ))}
       </ul>
+      <hr />
     </div>
   )
 }

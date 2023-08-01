@@ -6,6 +6,7 @@ export default function Answer({ answer, questionId, answerQuestion, isFinished,
         type="radio"
         name={`question-${questionId}`}
         onClick={() => answerQuestion(questionId, answer.id)}
+        disabled={isFinished}
       />
       <label
         htmlFor={answer.id}
