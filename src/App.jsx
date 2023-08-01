@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { nanoid } from 'nanoid'
 import Question from "./Question"
 import { shuffleArray } from "./utils"
+import { decode } from "html-entities"
 
 const apiURL = "https://opentdb.com/api.php?amount=5&difficulty=easy&type=multiple"
 
@@ -22,7 +23,7 @@ function App() {
             answers: shuffleArray([
               q.correct_answer,
               ...q.incorrect_answers,
-            ]).map(a => ({ id: nanoid(), answer: a })),
+            ]).map(a => ({ id: nanoid(), answer: decode(a) })),
             ...q
           }));
           setQuestions(allQuestions)
