@@ -2,7 +2,9 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  z-index: 1;
 }
+
 
 html, 
 body,
@@ -27,12 +29,14 @@ body,
   position: absolute;
   top: 0;
   right: 0;
+  z-index: 0;
 }
 
 .circle-blue{
   position: absolute;
   bottom: 0;
   left: 0;
+  z-index: 0;
 }
 
 .btn-primary {
@@ -74,7 +78,12 @@ hr{
   gap: 1rem;
   margin: 1rem 0;
   font-size: .9rem;
+  flex-wrap: wrap;
 
+}
+
+.answers li {
+  margin-top: .5rem;
 }
 
 .answers label {
